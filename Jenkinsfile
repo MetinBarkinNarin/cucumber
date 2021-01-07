@@ -30,9 +30,9 @@ node() {
 		def labels = '["regression","automated_regression"]'
 		def environment = "DEV"
 		def testExecutionFieldId = 10007
-		def testEnvironmentFieldName = "customfield_10132"
+		def testEnvironmentFieldName = "customfield_10131"
 		def projectKey = "WOO"
-		def xrayConnectorId = '3ecdab2a-9ccb-4b99-99cb-2312e9135dc5'
+		def xrayConnectorId = '335af8bd-b7bd-41d4-ab8a-cde00f41bbd1'
 		def info = '''{
 				"fields": {
 					"project": {
