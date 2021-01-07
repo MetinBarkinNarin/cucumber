@@ -13,7 +13,7 @@ node() {
         git branch: 'xray_video', credentialsId: '', url: repoURL
     }
     stage('Cucumber Tests') {
-        withMaven(maven: 'maven35') {
+        withMaven(maven: 'maven-3') {
             sh """
 			cd ${env.WORKSPACE_LOCAL}
 			mvn clean test
