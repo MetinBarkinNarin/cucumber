@@ -12,19 +12,14 @@ node() {
     stage('Checkout Self') {
         git branch: 'xray_video', credentialsId: '', url: repoURL
     }
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-u root'
+    stage('Cucumber Tests') {
+        withMaven(maven: 'maven-3') {
+            sh """
+			cd ${env.WORKSPACE_LOCAL}
+			mvn clean test
+		"""
         }
-      }
-      stages {
-        stage('Build') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-      }
+    }
     stage('Expose report') {
         archive "**/cucumber.json"
         cucumber '**/cucumber.json'
