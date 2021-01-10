@@ -32,7 +32,7 @@ node() {
 		def testExecutionFieldId = 10007
 		def testEnvironmentFieldName = "customfield_10131"
 		def projectKey = "WOO"
-		def xrayConnectorId = '335af8bd-b7bd-41d4-ab8a-cde00f41bbd1'
+		def xrayConnectorId = '68e1a4a9-e834-497e-868c-9cdc1790d536'
 		def info = '''{
 				"fields": {
 					"project": {
