@@ -48,7 +48,8 @@ node() {
 				]
 				}
 				}'''
-       step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',importInfo: info,projectKey: 'WOO',inputInfoSwitcher: 'fileContent', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
+	   step([$class: 'XrayImportFeatureBuilder', credentialId: '', folderPath: 'target/cucumber.json', lastModified: '', preconditions: '', projectKey: 'WOO', serverInstance: 'SERVER-967e91de-62c4-4d1e-a48b-5abf6f7b4b4f', testInfo: ''])
+       //step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',importInfo: info,projectKey: 'WOO',inputInfoSwitcher: 'fileContent', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
 
         }
 	stage('Import results to Xray') {
