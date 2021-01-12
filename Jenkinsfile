@@ -24,7 +24,7 @@ node() {
         archive '**/cucumber.json'
         cucumber '**/cucumber.json'
     }
-    stage('Deneme Import results to Xray') {
+   /* stage('Deneme Import results to Xray') {
     	def description = "[BUILD_URL|${env.BUILD_URL}]"
     		def labels = '["regression","automated_regression"]'
     		def environment = "DEV"
@@ -53,7 +53,7 @@ node() {
 	   //step([$class: 'XrayImportFeatureBuilder', credentialId: '', importFilePath: 'target/cucumber.json', lastModified: '', preconditions: '', projectKey: 'WOO', serverInstance: 'SERVER-967e91de-62c4-4d1e-a48b-5abf6f7b4b4f', testInfo: ''])
        //step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',importInfo: info,projectKey: 'WOO',inputInfoSwitcher: 'fileContent', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
 
-        }
+        }*/
 	stage('Import results to Xray') {
 
 		def description = "[BUILD_URL|${env.BUILD_URL}]"
@@ -80,6 +80,6 @@ node() {
 				}
 				}'''
 			echo info
-			step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId])
+			step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: 'SERVER-946c7738-281f-4ee9-bff5-5b78308fb9d7'])
 		}
 }
