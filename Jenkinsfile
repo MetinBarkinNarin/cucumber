@@ -25,7 +25,7 @@ node() {
         cucumber '**/cucumber.json'
     }
     stage('Test'){
-      sh "cd target && cucumber -x -f json -o cucumber.json"
+      sh "cd target -x -f json -o cucumber.json"
 
     }
     stage('Deneme Import results to Xray') {
