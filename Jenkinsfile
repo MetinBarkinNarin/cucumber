@@ -25,8 +25,23 @@ node() {
         cucumber '**/cucumber.json'
     }
     stage('Deneme Import results to Xray') {
-
-       step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',projectKey: 'WOO', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
+		def info = '''{
+				"fields": {
+					"project": {
+					"key": "''' + projectKey + '''"
+				},
+				"labels":''' + labels + ''',
+				"description":"''' + description + '''",
+				"summary": "Automated Regression Execution @ ''' + env.BUILD_TIME + ' ' + environment + ''' " ,
+				"issuetype": {
+				"id": "''' + testExecutionFieldId + '''"
+				},
+				"''' + testEnvironmentFieldName + '''" : [
+				"''' + environment + '''"
+				]
+				}
+				}'''
+       step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',importInfo: info,projectKey: 'WOO', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
 
         }
 	stage('Import results to Xray') {
