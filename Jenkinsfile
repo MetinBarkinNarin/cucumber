@@ -24,6 +24,11 @@ node() {
         archive '**/cucumber.json'
         cucumber '**/cucumber.json'
     }
+    stage('Deneme Import results to Xray') {
+            steps {
+                step([$class: 'XrayImportBuilder', endpointName: '/cucumber', importFilePath: 'target/cucumber.json',projectKey: 'WOO', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
+            }
+        }
 	stage('Import results to Xray') {
 
 		def description = "[BUILD_URL|${env.BUILD_URL}]"
