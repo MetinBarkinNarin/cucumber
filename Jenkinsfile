@@ -25,10 +25,17 @@ node() {
         cucumber '**/cucumber.json'
     }
     stage('Deneme Import results to Xray') {
+    	def description = "[BUILD_URL|${env.BUILD_URL}]"
+    		def labels = '["regression","automated_regression"]'
+    		def environment = "DEV"
+    		def testExecutionFieldId = 10007
+    		def testEnvironmentFieldName = "customfield_10131"
+    		def projectKey = "WOO"
+    		def xrayConnectorId = '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'
 		def info = '''{
 				"fields": {
 					"project": {
-					"key": "''' + projectKey + '''"
+					"key": "''' + "WOO" + '''"
 				},
 				"labels":''' + labels + ''',
 				"description":"''' + description + '''",
