@@ -24,10 +24,6 @@ node() {
         archive '**/cucumber.json'
         cucumber '**/cucumber.json'
     }
-    stage('Test'){
-      sh "cd target -x -f json -o cucumber.json"
-
-    }
     stage('Deneme Import results to Xray') {
 
        step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',projectKey: 'WOO', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
