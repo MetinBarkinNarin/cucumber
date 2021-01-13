@@ -24,34 +24,7 @@ node() {
         archive '**/cucumber.json'
         cucumber '**/cucumber.json'
     }
-   stage("Using curl example") {
-                   script {
-                    final String url = "http://localhost:8080/rest/raven/1.0/import/execution/cucumber/multipart"
-
-                          sh(script: "curl -d "info='''{
-        				"fields": {
-        					"project": {
-        					"key": "''' + "WOO" + '''"
-        				},
-        				"labels":''' + labels + ''',
-        				"description":"''' + description + '''",
-        				"summary": "Automated Regression Execution @ ''' + env.BUILD_TIME + ' ' + environment + ''' " ,
-        				"issuetype": {
-        				"id": "''' + testExecutionFieldId + '''"
-        				},
-        				"''' + testEnvironmentFieldName + '''" : [
-        				"''' + environment + '''"
-        				]
-        				}
-        				}'''"-F result=@cucumber.json -u mnarin:Bn.5454574 $url")
-                                
-
-              
-                    
-                }
-            }
-   }
-   /* stage('Deneme Import results to Xray') {
+    stage('Deneme Import results to Xray') {
     	def description = "[BUILD_URL|${env.BUILD_URL}]"
     		def labels = '["regression","automated_regression"]'
     		def environment = "DEV"
@@ -76,7 +49,7 @@ node() {
 				}
 				}'''
 
-		step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'target/cucumber.json', importInParallel: 'false', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: 'SERVER-946c7738-281f-4ee9-bff5-5b78308fb9d7'])
+		step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'target/cucumber.json', importInParallel: 'false', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4'])
 	   //step([$class: 'XrayImportFeatureBuilder', credentialId: '', importFilePath: 'target/cucumber.json', lastModified: '', preconditions: '', projectKey: 'WOO', serverInstance: 'SERVER-967e91de-62c4-4d1e-a48b-5abf6f7b4b4f', testInfo: ''])
        //step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',importInfo: info,projectKey: 'WOO',inputInfoSwitcher: 'fileContent', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
 
