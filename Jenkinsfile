@@ -41,7 +41,10 @@ node() {
         				]
         				}
         				}'''
-        				sh "curl -u mnarin:Bn.5454574 -F info='info' -F result=@cucumber.json 'http://localhost:8080/rest/raven/1.0/import/execution/cucumber/multipart"
+	    script {
+           sh "curl -u mnarin:Bn.5454574 -F info='info' -F result=@cucumber.json 'http://localhost:8080/rest/raven/1.0/import/execution/cucumber/multipart"
+          }
+        				
     }
      /*post {
         always {
