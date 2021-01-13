@@ -24,6 +24,32 @@ node() {
         archive '**/cucumber.json'
         cucumber '**/cucumber.json'
     }
+    stage('Import report') {
+        		def info = '''{
+        				"fields": {
+        					"project": {
+        					"key": "''' + "WOO" + '''"
+        				},
+        				"labels":''' + labels + ''',
+        				"description":"''' + description + '''",
+        				"summary": "Automated Regression Execution @ ''' + env.BUILD_TIME + ' ' + environment + ''' " ,
+        				"issuetype": {
+        				"id": "''' + testExecutionFieldId + '''"
+        				},
+        				"''' + testEnvironmentFieldName + '''" : [
+        				"''' + environment + '''"
+        				]
+        				}
+        				}'''
+        				sh "curl -u mnarin:Bn.5454574 -F info='info' -F result=@cucumber.json 'http://localhost:8080/rest/raven/1.0/import/execution/cucumber/multipart"
+    }
+     /*post {
+        always {
+          script {
+            sh "curl -u mnarin:Bn.5454574 -F info=@createTestExec.json -F result=@cucumber.json 'http://localhost:8080/rest/raven/1.0/import/execution/cucumber/multipart"
+          }
+        }
+      }*/
    /* stage('Deneme Import results to Xray') {
     	def description = "[BUILD_URL|${env.BUILD_URL}]"
     		def labels = '["regression","automated_regression"]'
@@ -53,7 +79,7 @@ node() {
 	   //step([$class: 'XrayImportFeatureBuilder', credentialId: '', importFilePath: 'target/cucumber.json', lastModified: '', preconditions: '', projectKey: 'WOO', serverInstance: 'SERVER-967e91de-62c4-4d1e-a48b-5abf6f7b4b4f', testInfo: ''])
        //step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',importInfo: info,projectKey: 'WOO',inputInfoSwitcher: 'fileContent', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
 
-        }*/
+        }
 	stage('Import results to Xray') {
 
 		def description = "[BUILD_URL|${env.BUILD_URL}]"
@@ -81,5 +107,5 @@ node() {
 				}'''
 			echo info
 			step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId ])
-		}
+		}*/
 }
