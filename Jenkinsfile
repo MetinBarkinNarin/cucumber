@@ -24,65 +24,6 @@ node() {
         archive '**/cucumber.json'
         cucumber '**/cucumber.json'
     }
-    stage('Import report') {
-        		def info = '''{
-        				"fields": {
-        					"project": {
-        					"key": "''' + "WOO" + '''"
-        				},
-        				"labels":''' + labels + ''',
-        				"description":"''' + description + '''",
-        				"summary": "Automated Regression Execution @ ''' + env.BUILD_TIME + ' ' + environment + ''' " ,
-        				"issuetype": {
-        				"id": "''' + testExecutionFieldId + '''"
-        				},
-        				"''' + testEnvironmentFieldName + '''" : [
-        				"''' + environment + '''"
-        				]
-        				}
-        				}'''
-	    script {
-           sh "curl -u mnarin:Bn.5454574 -F info='info' -F result=@cucumber.json 'http://localhost:8080/rest/raven/1.0/import/execution/cucumber/multipart"
-          }
-        				
-    }
-     /*post {
-        always {
-          script {
-            sh "curl -u mnarin:Bn.5454574 -F info=@createTestExec.json -F result=@cucumber.json 'http://localhost:8080/rest/raven/1.0/import/execution/cucumber/multipart"
-          }
-        }
-      }*/
-   /* stage('Deneme Import results to Xray') {
-    	def description = "[BUILD_URL|${env.BUILD_URL}]"
-    		def labels = '["regression","automated_regression"]'
-    		def environment = "DEV"
-    		def testExecutionFieldId = 10007
-    		def testEnvironmentFieldName = "customfield_10131"
-    		def projectKey = "WOO"
-    		def xrayConnectorId = '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'
-		def info = '''{
-				"fields": {
-					"project": {
-					"key": "''' + "WOO" + '''"
-				},
-				"labels":''' + labels + ''',
-				"description":"''' + description + '''",
-				"summary": "Automated Regression Execution @ ''' + env.BUILD_TIME + ' ' + environment + ''' " ,
-				"issuetype": {
-				"id": "''' + testExecutionFieldId + '''"
-				},
-				"''' + testEnvironmentFieldName + '''" : [
-				"''' + environment + '''"
-				]
-				}
-				}'''
-
-		step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'target/cucumber.json', importInParallel: 'false', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: 'SERVER-946c7738-281f-4ee9-bff5-5b78308fb9d7'])
-	   //step([$class: 'XrayImportFeatureBuilder', credentialId: '', importFilePath: 'target/cucumber.json', lastModified: '', preconditions: '', projectKey: 'WOO', serverInstance: 'SERVER-967e91de-62c4-4d1e-a48b-5abf6f7b4b4f', testInfo: ''])
-       //step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json',importInfo: info,projectKey: 'WOO',inputInfoSwitcher: 'fileContent', serverInstance: '967e91de-62c4-4d1e-a48b-5abf6f7b4b4f'])
-
-        }
 	stage('Import results to Xray') {
 
 		def description = "[BUILD_URL|${env.BUILD_URL}]"
@@ -91,7 +32,7 @@ node() {
 		def testExecutionFieldId = 10007
 		def testEnvironmentFieldName = "customfield_10131"
 		def projectKey = "WOO"
-		def xrayConnectorId = "967e91de-62c4-4d1e-a48b-5abf6f7b4b4f"
+		def xrayConnectorId = "ff3e7e37-2693-4260-a2b6-7cfacfcf9527"
 		def info = '''{
 				"fields": {
 					"project": {
@@ -110,5 +51,5 @@ node() {
 				}'''
 			echo info
 			step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId ])
-		}*/
+		}
 }
