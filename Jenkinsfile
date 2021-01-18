@@ -29,7 +29,7 @@ node() {
         println("Status: "+response.status)
         println("Content: "+response.content)
 		def xrayConnectorId = "946c7738-281f-4ee9-bff5-5b78308fb9d7"
-	def response=	   step([$class: 'XrayImportFeatureBuilder', folderPath: 'target/test-classes/com/mycompany/app', projectKey: 'WOO', serverInstance: xrayConnectorId])
+	step([$class: 'XrayImportFeatureBuilder', folderPath: 'target/test-classes/com/mycompany/app', projectKey: 'WOO', serverInstance: xrayConnectorId])
 	
     }
     stage('Import results to Xray') {
