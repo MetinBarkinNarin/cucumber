@@ -27,7 +27,7 @@ node() {
     stage('Import tasks to Jira for Features') {
 		def xrayConnectorId = "946c7738-281f-4ee9-bff5-5b78308fb9d7"
 	def response=	   step([$class: 'XrayImportFeatureBuilder', folderPath: 'target/test-classes/com/mycompany/app', projectKey: 'WOO', serverInstance: xrayConnectorId])
-	    echo response
+	    echo "Deneme" + XRAY_RAW_RESPONSE
     }
     stage('Import results to Xray') {
 
