@@ -31,7 +31,7 @@ node() {
 	step([$class: 'XrayImportFeatureBuilder', folderPath: 'target/test-classes/com/mycompany/app', projectKey: 'WOO', serverInstance: xrayConnectorId])
 	    
 	    def response = sh(script: "curl -u mnarin:mnarin -X GET -H 'Content-Type: application/json' 'http://10.150.17.73:8100/rest/api/2/issue/10123'", returnStdout: true)
-	     def response2 = sh(script: '$XRAY_TESTS', returnStdout: true)
+	     def response2 = sh(script: '$XRAY_ISSUES_MODIFIED', returnStdout: true)
 		echo response
 	    echo response2
 	
