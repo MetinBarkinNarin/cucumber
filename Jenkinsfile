@@ -26,10 +26,12 @@ node() {
     }
     stage('Import tasks to Jira for Features') {
 
-	   sh "curl -u mnarin:mnarin -X GET -H 'Content-Type: application/json' 'http://10.150.17.73:8100/rest/api/2/issue/10123'"
-
+	  
 		def xrayConnectorId = "946c7738-281f-4ee9-bff5-5b78308fb9d7"
 	step([$class: 'XrayImportFeatureBuilder', folderPath: 'target/test-classes/com/mycompany/app', projectKey: 'WOO', serverInstance: xrayConnectorId])
+	    
+	    def response= sh "curl -u mnarin:mnarin -X GET -H 'Content-Type: application/json' 'http://10.150.17.73:8100/rest/api/2/issue/10123'"
+		echo response
 	
     }
     stage('Import results to Xray') {
