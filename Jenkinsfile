@@ -24,7 +24,11 @@ node() {
         archive '**/cucumber.json'
         cucumber '**/cucumber.json'
     }
-	stage('Import results to Xray') {
+    stage('Import tasks to Jira for Features') {
+		def xrayConnectorId = "946c7738-281f-4ee9-bff5-5b78308fb9d7"
+		   step([$class: 'XrayImportFeatureBuilder', folderPath: 'target/test-classes/com/mycompany/app', projectKey: 'WOO', serverInstance: xrayConnectorId])
+    }
+    stage('Import results to Xray') {
 
 		def description = "[BUILD_URL|${env.BUILD_URL}]"
 		def labels = '["regression","automated_regression"]'
@@ -32,7 +36,7 @@ node() {
 		def testExecutionFieldId = 10007
 		def testEnvironmentFieldName = "customfield_10131"
 		def projectKey = "WOO"
-		def xrayConnectorId = "ff3e7e37-2693-4260-a2b6-7cfacfcf9527"
+		def xrayConnectorId = "946c7738-281f-4ee9-bff5-5b78308fb9d7"
 		def info = '''{
 				"fields": {
 					"project": {
@@ -50,6 +54,6 @@ node() {
 				}
 				}'''
 			echo info
-			step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId ])
-		}
+	 step([$class: 'XrayImportBuilder', endpointName: 'CUCUMBER_MULTIPART', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId ])
+    }
 }
